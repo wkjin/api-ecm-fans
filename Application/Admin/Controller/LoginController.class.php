@@ -1,5 +1,4 @@
 <?php
-// 本类由系统自动生成，仅供测试用途
 namespace Home\Controller;
 use Think\Controller;
 class LoginController extends Controller {
@@ -10,4 +9,8 @@ class LoginController extends Controller {
     }
 
 
+    //登录处理
+    public function login(){
+        var_dump($_POST);
+    }
 }
