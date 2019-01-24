@@ -29,3 +29,23 @@ function toErrorData($data = array(), $message = '操作失败'){
 function toSysErrorData($data = array(), $message = '系统错误'){
     return toReturnData(-1, $data, $message);
 }
+
+//把数组进行层级堆叠与排序
+function toLayer($data, $idColumn = 'id', $sortColumn='sort', $order='desc', $childName='_child', $pidColumn='pid', $pidStart = 0){
+    if(!is_array($data)){
+        return null;
+    }
+    $treeData = [];
+    foreach ($data as $key => $value){
+        if(intval($pidStart) === intval($value[$pidColumn])){
+            $value[$childName] = toLayer($data, $idColumn, $sortColumn, $order, $childName, $pidColumn, $value[$idColumn]);
+            $treeData[intval($value[$sortColumn])] = $value;
+        }
+    };
+    if($order === 'desc'){
+        ksort($treeData);
+    }else{
+        krsort($treeData);
+    }
+    return array_values($treeData);
+}

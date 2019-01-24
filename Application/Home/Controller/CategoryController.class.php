@@ -9,11 +9,11 @@ class CategoryController extends CommonController {
         $this->categoryService = CS('Category');//定义使用service
     }
 
-    //获取栏目信息
+    //获取栏目信息(按照子菜单形式)
     public function getCategorys(){
         $data = $this->categoryService->getCategorys(array('status' => 1));//获取生效的栏目
         if(!is_bool($data)){
-            $this->ajaxSuccess($data, '获取栏目列表成功');
+            $this->ajaxSuccess(toLayer($data), '获取栏目列表成功');
         }else{
             $this->ajaxError([], '获取栏目列表失败');
         }
