@@ -18,4 +18,15 @@ class CategoryController extends CommonController {
             $this->ajaxError([], '获取栏目列表失败');
         }
     }
+
+    //获取栏目信息（根据条件）
+    public function getCategorysByCondition(){
+        $condition = I('get.');
+        $data = $this->categoryService->getCategorys($condition);//获取生效的栏目
+        if(!is_bool($data)){
+            $this->ajaxSuccess($data, '获取栏目列表成功');
+        }else{
+            $this->ajaxError([], '获取栏目列表失败');
+        }
+    }
 }
