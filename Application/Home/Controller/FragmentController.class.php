@@ -12,8 +12,12 @@ class FragmentController extends CommonController {
     //获取碎片信息
     public function getFragments(){
         $data = $this->fragmentService->getFragments();
-        if(!is_bool($data)){
-            $this->ajaxSuccess($data, '获取碎片列表成功');
+        if(!is_bool($data)){//把key转化为键值
+            $res = [];
+            foreach ($data as $item){
+                $res[$item['key']] = $item;
+            }
+            $this->ajaxSuccess($res, '获取碎片列表成功');
         }else{
             $this->ajaxError([], '获取碎片列表失败');
         }
