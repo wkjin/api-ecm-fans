@@ -19,7 +19,7 @@ class ArticleController extends CommonController {
             $where['category_id'] = intval($category_id);
         }
         $pageNow = I('get.pageNow', 1, 'int');
-        $pageSize = I('pageSize', 10, 'init');
+        $pageSize = I('pageSize', 10, 'int');
         $data = $this->articleService->getArticles($where, $pageNow, $pageSize);
         if(!is_bool($data)){
             $this->ajaxSuccess($data, '获取文章列表成功');
