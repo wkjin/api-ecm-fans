@@ -32,6 +32,12 @@ class ArticleService  extends  CommonService {
         }
         $data = empty($data)?[]: $data;
         $data['update_time'] = time();
+        if(isset($data['content_cn'])){
+            $data['abstract_cn'] = strip_tags($data['content_cn']);
+        }
+        if(isset($data['content_en'])){
+            $data['abstract_en'] = strip_tags($data['content_en']);
+        }
         return $this->update($condition, $data);
     }
 
@@ -40,7 +46,15 @@ class ArticleService  extends  CommonService {
             return false;
         }
         $data['update_time'] = $data['create_time'] = time();
-        $data['is_article'] = 1;//是文章
+        if(!isset($data['is_article'])){
+            $data['is_article'] = 1;//是文章
+        }
+        if(isset($data['content_cn'])){
+            $data['abstract_cn'] = strip_tags($data['content_cn']);
+        }
+        if(isset($data['content_en'])){
+            $data['abstract_en'] = strip_tags($data['content_en']);
+        }
         return $this->insert($data);
     }
 
