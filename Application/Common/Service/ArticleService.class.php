@@ -33,10 +33,10 @@ class ArticleService  extends  CommonService {
         $data = empty($data)?[]: $data;
         $data['update_time'] = time();
         if(isset($data['content_cn'])){
-            $data['abstract_cn'] = substr(strip_tags($data['content_cn']), 0, 120);
+            $data['abstract_cn'] = $this->getAbstract($data['content_cn']);
         }
         if(isset($data['content_en'])){
-            $data['abstract_en'] = substr(strip_tags($data['content_en']), 0, 120);
+            $data['abstract_en'] = $this->getAbstract($data['content_en']);
         }
         return $this->update($condition, $data);
     }
@@ -50,12 +50,17 @@ class ArticleService  extends  CommonService {
             $data['is_article'] = 1;//是文章
         }
         if(isset($data['content_cn'])){
-            $data['abstract_cn'] = substr(strip_tags($data['content_cn']), 0, 120);
+            $data['abstract_cn'] = $this->getAbstract($data['content_cn']);
         }
         if(isset($data['content_en'])){
-            $data['abstract_en'] = substr(strip_tags($data['content_en']), 0, 120);
+            $data['abstract_en'] = $this->getAbstract($data['content_en']);
         }
         return $this->insert($data);
+    }
+
+    //获取文章的简介
+    private function getAbstract($content){
+        return substr(str_replace('&nbsp;', ' ', strip_tags($content)), 0, 120);
     }
 
     public function removeArticle($condition){
