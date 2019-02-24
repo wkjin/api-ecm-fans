@@ -60,7 +60,7 @@ class ArticleService  extends  CommonService {
 
     //获取文章的简介
     private function getAbstract($content){
-        return substr(str_replace('&nbsp;', ' ', strip_tags($content)), 0, 120);
+        return substr(str_replace('&nbsp;', ' ', strip_tags($content)), 0, 360);
     }
 
     public function removeArticle($condition){
