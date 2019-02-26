@@ -11,7 +11,7 @@ class CategoryController extends CommonController {
 
     //获取栏目信息(按照子菜单形式)
     public function getCategorys(){
-        $data = $this->categoryService->getCategorys(array('status' => 1));//获取生效的栏目
+        $data = $this->_getCategorys();
         if(!is_bool($data)){
             $this->ajaxSuccess(toLayer($data), '获取栏目列表成功');
         }else{
@@ -19,11 +19,16 @@ class CategoryController extends CommonController {
         }
     }
 
-    //获取栏目信息（根据条件）
-    public function getCategorysByCondition(){
+    //内部获取栏目信息
+    private function _getCategorys(){
         $condition = I('get.');
         $condition['status'] = 1;
-        $data = $this->categoryService->getCategorys($condition);//获取生效的栏目
+        return $this->categoryService->getCategorys($condition);//获取生效的栏目
+    }
+
+    //获取栏目信息（根据条件）
+    public function getCategorysByCondition(){
+        $data = $this->_getCategorys();
         if(!is_bool($data)){
             $this->ajaxSuccess($data, '获取栏目列表成功');
         }else{
