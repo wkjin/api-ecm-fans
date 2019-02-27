@@ -39,7 +39,11 @@ function toLayer($data, $idColumn = 'id', $sortColumn='sort', $order='desc', $ch
     foreach ($data as $key => $value){
         if(intval($pidStart) === intval($value[$pidColumn])){
             $value[$childName] = toLayer($data, $idColumn, $sortColumn, $order, $childName, $pidColumn, $value[$idColumn]);
-            $treeData[intval($value[$sortColumn])] = $value;
+            $key = intval($value[$sortColumn]);
+            while (isset($treeData[$key])){
+                $key ++;
+            }
+            $treeData[$key] = $value;
         }
     };
     if($order === 'desc'){
