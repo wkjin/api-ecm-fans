@@ -19,6 +19,11 @@ class ProductController extends CommonController {
         }
         $condition = I('get.');
         unset($condition['category_id']);
+        foreach ($condition as $key => $value){
+            if(empty($value)){
+                unset($condition[$key]);
+            }
+        }
         if(count($condition) > 0){
             $where = array_merge($condition, $where);
         }
