@@ -17,6 +17,11 @@ class ProductController extends CommonController {
         if($category_id > 0){
             $where['category_id'] = intval($category_id);
         }
+        $condition = I('get.');
+        unset($condition['category_id']);
+        if(count($condition) > 0){
+            $where = array_merge($condition, $where);
+        }
         $pageNow = I('get.pageNow', 1, 'int');
         $pageSize = I('pageSize', 10, 'int');
         $data = $this->productService->getProducts($where, $pageNow, $pageSize);
