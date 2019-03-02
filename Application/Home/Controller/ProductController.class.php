@@ -57,6 +57,9 @@ class ProductController extends CommonController {
         }
         $res = $this->productService->getProductDetail($where);
         if(is_array($res)){
+            if(isset($res['update_time'])){
+                $res['update_time'] = date('Y-m-d H:i:s', $res['update_time']);
+            }
             $this->ajaxSuccess($res, '获取产品文章详情成功');
         }else{
             $this->ajaxError(['condition' => $where], '获取产品详情失败');
