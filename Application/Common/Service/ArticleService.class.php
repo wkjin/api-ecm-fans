@@ -23,6 +23,10 @@ class ArticleService  extends  CommonService {
     }
 
     public function getArticleDetail($where = []){
+        foreach ($where as $key => $value){
+            unset($where[$key]);
+            $where['a.' . $key] = $value;
+        }
         return $this->tj()->findItem($where);
     }
 
