@@ -1,7 +1,7 @@
 <?php
 namespace Home\Controller;
 //header("Access-Control-Allow-Origin: http://127.0.0.1:5500");
-header("Access-Control-Allow-Origin: http://www.ecm-fans.com");
+header("Access-Control-Allow-Origin: http://test.ecm-fans.com");
 header("Access-Control-Allow-Credentials: true");
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Connection, User-Agent, Cookie");
 class UserController extends CommonController {
