@@ -44,7 +44,14 @@ class UserController extends CommonController {
 
     //生成验证码
     public function createCheckCode(){
-        $Verify = new \Think\Verify();
+        $config = [
+            'fontSize' => 19, // 验证码字体大小
+            'length' => 4, // 验证码位数
+            'imageH' => 34,
+            'useCurve'  =>  false,
+            'useNoise'  =>  false
+        ];
+        $Verify = new \Think\Verify($config);
         $Verify->entry();
     }
 
