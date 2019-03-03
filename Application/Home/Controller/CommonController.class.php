@@ -2,7 +2,7 @@
 //前端的公共类
 namespace Home\Controller;
 use Think\Controller;
-header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Origin: http://test.ecm-fans.com");
 header("Access-Control-Allow-Credentials: true");
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Connection, User-Agent, Cookie");
 class CommonController extends Controller {

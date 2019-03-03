@@ -1,7 +1,6 @@
 <?php
 namespace Home\Controller;
 use Think\Exception;
-
 class ArticleController extends CommonController {
     private $articleService = null;//使用的service对象（一个model）
 
