@@ -60,7 +60,6 @@ class UserController extends CommonController {
         if(empty($code)){
             return false;
         }else{
-            $code = I('code');
             $verify = new \Think\Verify();
             if($verify->check($code)){
                 return true;
