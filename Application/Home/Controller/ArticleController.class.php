@@ -44,6 +44,9 @@ class ArticleController extends CommonController {
             throw new Exception('无知错误');
         }
         $res = $this->articleService->getArticleDetail($where);
+        if(isset($res['update_time'])){
+            $res['update_time'] = date('Y-m-d H:i:s', $res['update_time']);
+        }
         if(is_array($res)){
             $this->ajaxSuccess($res, '获取文章详情成功');
         }else{
