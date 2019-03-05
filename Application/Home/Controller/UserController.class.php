@@ -34,7 +34,7 @@ class UserController extends CommonController {
     //调用发送邮件
     private function  sendEmail($body){
         return $this->think_send_mail(
-            '573807412@qq.com',
+            'tech001@ecm-fans.com',
             '浩沅官网在线留言提醒',
             '浩沅官网在线留言',
              $body,

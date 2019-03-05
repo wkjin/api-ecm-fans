@@ -12,13 +12,13 @@ return array(
 
     //邮件发送配置
     'THINK_EMAIL' => array(
-        'SMTP_HOST' => 'smtp.163.com', //SMTP服务器
+        'SMTP_HOST' => 'smtp.exmail.qq.com', //SMTP服务器
         'SMTP_PORT' => '465', //SMTP服务器端口
-        'SMTP_USER' => 'a573807412@163.com', //SMTP服务器用户名
-        'SMTP_PASS' => 'a573807412', //SMTP服务器密码
-        'FROM_EMAIL' => 'a573807412@163.com', //发件人EMAIL
-        'FROM_NAME' => 'wkj', //发件人名称
+        'SMTP_USER' => 'sent@ecm-fans.com', //SMTP服务器用户名
+        'SMTP_PASS' => 'Sent1234', //SMTP服务器密码
+        'FROM_EMAIL' => 'sent@ecm-fans.com', //发件人EMAIL
+        'FROM_NAME' => 'sent@ecm-fans', //发件人名称
         'REPLY_EMAIL' => '', //回复EMAIL（留空则为发件人EMAIL）
-        'REPLY_NAME' => 're_wkj', //回复名称（留空则为发件人名称）
+        'REPLY_NAME' => 're_sent@ecm-fans', //回复名称（留空则为发件人名称）
     ),
 );
