@@ -85,7 +85,8 @@ class UserController extends CommonController {
         $bodyHtml= '用户名：' . $data['username'] . '<br>' .
             '手机号：' . $data['telphone'] . '<br>' .
             '邮箱：' . $data['email'] . '<br>' .
-            '公司名称：' . $data['companyName'] . '<br>';
+            '公司名称：' . $data['companyName'] . '<br>' .
+            '留言内容：' . $data['message'] . '<br>';
         $res = $this->sendEmail($bodyHtml);
         if(is_bool($res) && $res === true){
             $this->ajaxSuccess(null, '留言成功');
