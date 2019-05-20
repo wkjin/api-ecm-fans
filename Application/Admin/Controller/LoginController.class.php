@@ -21,6 +21,12 @@ class LoginController extends CommonController {
         }
     }
 
+    //注销登录
+    public function logout(){
+        session(null);
+        $this->ajaxSuccess(null,'注销成功');
+    }
+
     public function debug(){
         session('user', array(
            'id' => 1,
