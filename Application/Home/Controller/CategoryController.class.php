@@ -29,7 +29,7 @@ class CategoryController extends CommonController {
         $condition = I('get.');
         $condition['_logic'] = 'or';
         $map['_complex'] = $condition;
-        $map['is_index'] = 1;
+        //$map['is_index'] = 1;
         $data = $this->_getCategorys($map);
         if(!is_bool($data)){
             $this->ajaxSuccess(toLayer($data), '获取栏目列表成功');
