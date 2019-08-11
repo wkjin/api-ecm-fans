@@ -17,7 +17,7 @@ class ProductService  extends  CommonService {
 
     //需要与文章表联合查询获取产品信息
     public function getProducts($where = [], $pageNow = 1, $pageSize = 999){
-        return $this->tj()->getList($where, $pageNow, $pageSize, 'p.sort asc, p.id desc');
+        return $this->tj()->getList($where, $pageNow, $pageSize, 'sort asc, p.id desc');
     }
 
     //需要与文章表联合查询获取产品信息
