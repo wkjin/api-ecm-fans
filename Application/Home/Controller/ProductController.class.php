@@ -28,7 +28,7 @@ class ProductController extends CommonController {
             $where = array_merge($condition, $where);
         }
         $pageNow = I('get.pageNow', 1, 'int');
-        $pageSize = I('pageSize', 10, 'int');
+        $pageSize = I('pageSize', 10000, 'int');
         $data = $this->productService->getProducts($where, $pageNow, $pageSize);
         if(!is_bool($data)){
             $this->ajaxSuccess($data, '获取产品列表成功');
