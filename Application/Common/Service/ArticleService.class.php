@@ -19,7 +19,7 @@ class ArticleService  extends  CommonService {
             $where = [];
         }
         $where['is_article'] = 1;//只是获取文章信息，如果不是文章的不用获取
-        return $this->tj()->getList($where, $pageNow, $pageSize, 'a.order asc, a.id desc');
+        return $this->tj()->getList($where, $pageNow, $pageSize,array('sort' => 'asc','id'=>'desc'));
     }
 
     public function getArticleDetail($where = []){
