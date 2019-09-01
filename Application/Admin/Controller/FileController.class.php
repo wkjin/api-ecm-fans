@@ -46,14 +46,22 @@ class FileController extends CommonController {
     }
 
     //上传
-    private function _upload($filePrefix){
+    private function _upload($filePrefix, $saveDirName='', $fileNameDealFunc){
         if(empty($_FILES)){
             $this->wangError('上传文件为空');
         }else{
             $fileData = array();
+            $saveDirName = $saveDirName.trim('/');
+            if(is_string($saveDirName) && $saveDirName !== ''){
+                $saveDirName .= '/';
+            }
             foreach ($_FILES as $file){
-                $fileName = uniqid($filePrefix, true) . preg_replace("/.*(\.\w+)$/" , "\\1" ,$file['name'] );
-                if($this->moveFile($file['tmp_name'], $this->uploadPath . $fileName)){
+                if(!is_callable($fileNameDealFunc)){
+                    $fileName = uniqid($filePrefix, true) . preg_replace("/.*(\.\w+)$/" , "\\1" ,$file['name'] );
+                }else{
+                    $fileName = $fileNameDealFunc($file['name']);
+                }
+                if($this->moveFile($file['tmp_name'], $this->uploadPath . $saveDirName . $fileName)){
                     array_push($fileData, $this->uploadUrlPath . $fileName);
                 }
             }
@@ -73,6 +81,40 @@ class FileController extends CommonController {
     //一般文件上传
     public function fileUpload(){
         $this->_upload('file_');
+    }
+
+    //pdf上传
+    public function pdfUpload(){
+        $this->_upload('pdf_', 'PDF', function ($fileName){
+            return urlencode(preg_replace("/(.*)\.\w+$/" , "\\1" ,$fileName )) . preg_replace("/.*(\.\w+)$/" , "\\1" ,$fileName );
+        });
+    }
+
+    public function test($func){
+        $a = $func();
+        var_dump($a);
+    }
+    //获取一个文件夹中所有的一般文件（不是富文本编辑器文件）
+    public function getPDFFils(){
+        $basePath = $this->uploadPath . 'PDF/';
+        $baseUrl = $this->uploadUrlPath . 'PDF/';
+        $fileData = array();
+        foreach (scandir($basePath) as $file){
+            if($file !== '.' && $file !== '..') {
+                array_push($fileData,  ['url' => $baseUrl .$file, 'name' => urldecode($file)]);
+            }
+        }
+        $this->_wangEditorReturn(0, $fileData, '获取pdf列表成功');
+    }
+    //移除pdf文件
+    public  function removePdfFile(){
+        $fileName = I('post.fileName', '', 'string').trim('/');
+        if(!empty($fileName)){
+            $this->wangError('文件名为空：字段名：fileName');
+        }else{
+            unlink($this->uploadPath . 'PDF/' + $fileName);
+            $this->_wangEditorReturn(0, null, '删除PDF文件成功！！！');
+        }
     }
 
 }
