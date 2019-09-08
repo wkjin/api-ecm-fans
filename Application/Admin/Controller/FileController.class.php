@@ -100,7 +100,7 @@ class FileController extends CommonController {
         foreach (scandir($basePath) as $file){
             if($file !== '.' && $file !== '..') {
                 array_push($fileData,  [
-                    'url' => $baseUrl .urlencode($file),
+                    'url' => $this->rootUrl . '/Admin/File/readPDF/' . urldecode($file),
                     'name' => urldecode($file),
                     'downloadUrl'=> $this->rootUrl . '/Admin/File/downloadPDF?fileName=' . urldecode($file),
                     'deleteUrl' => $this->rootUrl. '/Admin/File/removePdfFile?fileName=' . urldecode($file),
@@ -110,7 +110,7 @@ class FileController extends CommonController {
         $this->ajaxSuccess($fileData, '获取pdf列表成功');
     }
     //读取pdf文件
-    public function readPDFFiles(){
+    public function readPDF(){
         if(preg_match("/^.*?\/([^\/]+\.pdf)$/", $_SERVER['PATH_INFO'], $match)){
             $fileName = $match[1];
             $fp = fopen($this->uploadPath . 'PDF/' . urlencode($fileName), "r");
