@@ -109,6 +109,18 @@ class FileController extends CommonController {
         }
         $this->ajaxSuccess($fileData, '获取pdf列表成功');
     }
+    //读取pdf文件
+    public function readPDFFiles(){
+        if(preg_match("/^.*?\/([^\/]+\.pdf)$/", $_SERVER['PATH_INFO'], $match)){
+            $fileName = $match[1];
+            $fp = fopen($this->uploadPath . 'PDF/' . urlencode($fileName), "r");
+            header('Content-type: application/pdf');
+            fpassthru($fp);
+            fclose($fp);
+        }else{
+            $this->error('请求的pdf不存在！！！');
+        }
+    }
     //移除pdf文件
     public  function removePdfFile(){
         $fileName = I('fileName', '', 'string');
@@ -124,6 +136,6 @@ class FileController extends CommonController {
         $fileName = I('fileName', '', 'string');
         header('Content-type: application/pdf');
         header('Content-Disposition: attachment; filename="' . $fileName . '"');
-        echo file_get_contents($this->uploadPath . 'PDF/' + urlencode($fileName));
+        echo file_get_contents($this->uploadPath . 'PDF/' . urlencode($fileName));
     }
 }
