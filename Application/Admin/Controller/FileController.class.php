@@ -101,7 +101,7 @@ class FileController extends CommonController {
             if($file !== '.' && $file !== '..') {
                 $fileNameDecode = urldecode($file);
                 array_push($fileData,  [
-                    'url' => $this->rootUrl . '/Admin/File/readPDF/' .substr($fileNameDecode, 0 , -12) . '?hash=' . substr($fileNameDecode, strlen($fileNameDecode)-12,12) ,
+                    'url' => $this->rootUrl . '/Admin/File/readPDF/' .substr($fileNameDecode, 0 , -12) . '.pdf?hash=' . substr($fileNameDecode, strlen($fileNameDecode)-12,8) ,
                     'name' => $fileNameDecode,
                     'downloadUrl'=> $this->rootUrl . '/Admin/File/downloadPDF?fileName=' . $fileNameDecode,
                     'deleteUrl' => $this->rootUrl. '/Admin/File/removePdfFile?fileName=' . $fileNameDecode,
@@ -115,7 +115,7 @@ class FileController extends CommonController {
         if(preg_match("/^.*?\/([^\/]+\.pdf)$/", $_SERVER['PATH_INFO'], $match)){
             $fileName = $match[1];
             $hash = $_REQUEST['hash'];
-            $fp = fopen($this->uploadPath . 'PDF/' . urlencode($fileName) . $hash, "r");
+            $fp = fopen($this->uploadPath . 'PDF/' . urlencode($fileName.substr(0, -4)) . $hash. '.pdf', "r");
             header('Content-type: application/pdf');
             fpassthru($fp);
             fclose($fp);
