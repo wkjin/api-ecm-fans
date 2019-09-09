@@ -99,11 +99,12 @@ class FileController extends CommonController {
         $fileData = array();
         foreach (scandir($basePath) as $file){
             if($file !== '.' && $file !== '..') {
+                $fileNameDecode = urldecode($file);
                 array_push($fileData,  [
-                    'url' => $this->rootUrl . '/Admin/File/readPDF/' . urldecode($file),
-                    'name' => urldecode($file),
-                    'downloadUrl'=> $this->rootUrl . '/Admin/File/downloadPDF?fileName=' . urldecode($file),
-                    'deleteUrl' => $this->rootUrl. '/Admin/File/removePdfFile?fileName=' . urldecode($file),
+                    'url' => $this->rootUrl . '/Admin/File/readPDF/' .substr($fileNameDecode, 0 , -12) . '?hash=' . substr($fileNameDecode, strlen($fileNameDecode)-12,12) ,
+                    'name' => $fileNameDecode,
+                    'downloadUrl'=> $this->rootUrl . '/Admin/File/downloadPDF?fileName=' . $fileNameDecode,
+                    'deleteUrl' => $this->rootUrl. '/Admin/File/removePdfFile?fileName=' . $fileNameDecode,
                 ]);
             }
         }
