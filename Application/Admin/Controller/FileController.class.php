@@ -115,8 +115,7 @@ class FileController extends CommonController {
         if(preg_match("/^.*?\/([^\/]+\.pdf)$/", $_SERVER['PATH_INFO'], $match)){
             $fileName = $match[1];
             $hash = $_GET['hash'];
-            var_dump(urlencode($fileName.substr(0, -4)) . $hash. '.pdf');die;
-            $fp = fopen($this->uploadPath . 'PDF/' . urlencode($fileName.substr(0, -4)) . $hash. '.pdf', "r");
+            $fp = fopen($this->uploadPath . 'PDF/' . urlencode(substr($fileName,0, -4)) . $hash. '.pdf', "r");
             header('Content-type: application/pdf');
             fpassthru($fp);
             fclose($fp);
